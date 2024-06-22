@@ -12,6 +12,7 @@ var (
 	ErrEventDateFuture   = errors.New("Event date must be in the future")
 	ErrEventCapacityZero = errors.New("event capacity must be greater than zero")
 	ErrEventPriceZero    = errors.New("event price must be greater than zero")
+	ErrEventNotFound     = errors.New("event not found")
 )
 
 const (
