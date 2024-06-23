@@ -1,7 +1,7 @@
 # Venda de Tickets de Eventos
 
 ## Descrição
-Este projeto é uma aplicação para a venda de tickets de eventos. Ele permite gerenciar eventos, spots (lugares/cadeiras) e tickets (ingressos), além de realizar a compra de tickets.
+Este projeto é uma aplicação desenvolvida em **Go** utilizando boas práticas de programação como **Clean Code** e **Domain-Driven Design (DDD)**. Ele é dedicado à venda e gestão de tickets para eventos, oferecendo funcionalidades robustas para o gerenciamento de eventos, spots (lugares/cadeiras) e tickets (ingressos).
 
 # Documentação do Projeto
 
