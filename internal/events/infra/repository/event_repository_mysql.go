@@ -134,9 +134,9 @@ func (r *mysqlEventRepository) FindSpotsByEventID(eventID string) ([]*domain.Spo
 
 }
 
-// FindSpotsByName busca um spot específico pelo nome e ID do evento no banco de dados.
+// FindSpotByName busca um spot específico pelo nome e ID do evento no banco de dados.
 // Retorna um ponteiro para o objeto Spot e um possível erro.
-func (r *mysqlEventRepository) FindSpotsByName(eventID, name string) (*domain.Spot, error) {
+func (r *mysqlEventRepository) FindSpotByName(eventID, name string) (*domain.Spot, error) {
 	query := `
 	SELECT 
 		s.id, s.event_id, s.name, s.status, s.ticket_id,
