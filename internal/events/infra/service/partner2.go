@@ -35,7 +35,7 @@ func (p *Partner2) MakeReservation(req *ReservationRequest) ([]ReservationRespon
 	// Converte a solicitação de reserva genérica para o formato específico do parceiro.
 	partnerReq := Partner2ReservationRequest{
 		Lugares:      req.Spots,
-		TipoIngresso: req.TicketType,
+		TipoIngresso: req.TicketKind,
 		Email:        req.Email,
 	}
 
