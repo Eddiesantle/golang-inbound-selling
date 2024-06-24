@@ -5,6 +5,8 @@ Este projeto é uma aplicação desenvolvida em **Go** utilizando boas práticas
 
 # Documentação do Projeto
 
+<img src="assets/clean-architecture.jpg">
+
 ## Exploração de Entidades
 
 ### Event
