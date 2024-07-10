@@ -63,7 +63,7 @@ func NewEvent(name, location, organization string, rating Rating, date time.Time
 }
 
 // Validar event
-func (e Event) Validate() error {
+func (e *Event) Validate() error {
 	if e.Name == "" {
 		return ErrEventNameRequired
 	}

@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	//_ "github.com/Eddiesantle/golang-inbound-selling/docs" // Import the generated docs
 	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/Eddiesantle/golang-inbound-selling/internal/events/infra/repository"
@@ -17,6 +18,7 @@ import (
 	"github.com/Eddiesantle/golang-inbound-selling/internal/events/usecase"
 
 	httpHandler "github.com/Eddiesantle/golang-inbound-selling/internal/events/infra/http"
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 func main() {
@@ -31,6 +33,7 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// Apontamento para Gateway API
 	partnerBaseURLs := map[int]string{
 		1: "http://host.docker.internal:8000/partner1",
 		2: "http://host.docker.internal:8000/partner2",
@@ -52,7 +55,7 @@ func main() {
 	)
 
 	r := http.NewServeMux()
-	// r.HandleFunc("/swagger/", httpSwagger.WrapHandler)
+	r.HandleFunc("/swagger/", httpSwagger.WrapHandler)
 	r.HandleFunc("/events", eventsHandler.ListEvents)
 	r.HandleFunc("/events/{eventID}", eventsHandler.GetEvent)
 	r.HandleFunc("/events/{eventID}/spots", eventsHandler.ListSpots)

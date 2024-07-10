@@ -1,0 +1,10 @@
+### Get Event by ID with Variable
+@baseUrl = http://host.docker.internal:8080
+@eventId = http://localhost:8080/events/5b79831a-a9d3-4538-8fb5-569494bd17a5
+
+### Listar todos os eventos 
+GET {{baseUrl}}/events
+
+### Get Event by ID
+GET {{baseUrl}}/events/{{eventId}}
+Accept: application/json

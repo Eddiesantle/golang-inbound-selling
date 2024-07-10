@@ -6,7 +6,7 @@ type GetEventInputDTO struct {
 	ID string
 }
 
-type GetEventOutputEventDTO struct {
+type GetEventOutputDTO struct {
 	ID           string  `json:"id"`
 	Name         string  `json:"name"`
 	Location     string  `json:"location"`
@@ -27,23 +27,21 @@ func NewGetEventUseCase(repo domain.EventRepository) *GetEventUseCase {
 	return &GetEventUseCase{repo: repo}
 }
 
-func (uc *GetEventUseCase) Execute(input GetEventInputDTO) (*GetEventOutputEventDTO, error) {
+func (uc *GetEventUseCase) Execute(input GetEventInputDTO) (*GetEventOutputDTO, error) {
 	event, err := uc.repo.FindEventByID(input.ID)
 	if err != nil {
 		return nil, err
 	}
 
-	return &GetEventOutputEventDTO{
+	return &GetEventOutputDTO{
 		ID:           event.ID,
 		Name:         event.Name,
 		Location:     event.Location,
 		Organization: event.Organization,
 		Rating:       string(event.Rating),
 		Date:         event.Date.Format("2006-01-02 15:04:05"),
-		ImageURL:     event.ImageURL,
 		Capacity:     event.Capacity,
 		Price:        event.Price,
 		PartnerID:    event.PartnerID,
 	}, nil
-
 }

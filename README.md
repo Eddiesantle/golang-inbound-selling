@@ -198,22 +198,35 @@ git clone https://github.com/Eddiesantle/golang-inbound-selling.git
 cd golang-inbound-selling
 ```
 
+3. Configure o banco de dados:
+Crie um banco de dados MySQL e configure as credenciais no arquivo de configuração do projeto.
+
+4. Execute docker compose 
+```
+docker compose up 
+```
+
+4. Acessar conteiner golang 
+```
+docker compose exec golang bash
+```
+
 2. Instale as dependências:
 ```bash
 go mod tidy
 ```
 
-3. Configure o banco de dados:
-Crie um banco de dados MySQL e configure as credenciais no arquivo de configuração do projeto.
-
 4. Execute a aplicação:
 
 ```bash
-go run main.go
+go run cmd/events/main.go
 ```
 
 5. Acesse a aplicação:
 Abra seu navegador e acesse http://localhost:8080.
+
+6. Acessar Documentação Api:
+http://localhost:8080/swagger.
 
 ## Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
