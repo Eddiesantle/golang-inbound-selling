@@ -26,6 +26,11 @@ const (
 	Rating18    Rating = "L18"
 )
 
+type User struct {
+	ID    string
+	Email string
+}
+
 type Event struct {
 	ID           string
 	Name         string

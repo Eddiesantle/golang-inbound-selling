@@ -10,7 +10,6 @@ import (
 	"syscall"
 	"time"
 
-	//_ "github.com/Eddiesantle/golang-inbound-selling/docs" // Import the generated docs
 	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/Eddiesantle/golang-inbound-selling/internal/events/infra/repository"
@@ -18,9 +17,15 @@ import (
 	"github.com/Eddiesantle/golang-inbound-selling/internal/events/usecase"
 
 	httpHandler "github.com/Eddiesantle/golang-inbound-selling/internal/events/infra/http"
+
+	_ "github.com/Eddiesantle/golang-inbound-selling/cmd/events/docs"
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
+// @title Swagger Example API
+// @version 1.0
+// @description This is a sample server Petstore server.
+// @termsOfService http://swagger.io/terms/
 func main() {
 	db, err := sql.Open("mysql", "test_user:test_password@tcp(golang-mysql:3306)/test_db")
 	if err != nil {
@@ -33,7 +38,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Apontamento para Gateway API
+	// Apontamento para Gateway API - KONG
 	partnerBaseURLs := map[int]string{
 		1: "http://host.docker.internal:8000/partner1",
 		2: "http://host.docker.internal:8000/partner2",
@@ -56,6 +61,7 @@ func main() {
 
 	r := http.NewServeMux()
 	r.HandleFunc("/swagger/", httpSwagger.WrapHandler)
+
 	r.HandleFunc("/events", eventsHandler.ListEvents)
 	r.HandleFunc("/events/{eventID}", eventsHandler.GetEvent)
 	r.HandleFunc("/events/{eventID}/spots", eventsHandler.ListSpots)

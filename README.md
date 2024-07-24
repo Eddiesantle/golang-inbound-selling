@@ -208,7 +208,7 @@ docker compose up
 
 4. Acessar conteiner golang 
 ```
-docker compose exec golang bash
+docker compose exec golang sh
 ```
 
 2. Instale as dependências:

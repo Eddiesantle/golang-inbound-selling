@@ -1,10 +1,29 @@
 ### Get Event by ID with Variable
-@baseUrl = http://host.docker.internal:8080
-@eventId = http://localhost:8080/events/5b79831a-a9d3-4538-8fb5-569494bd17a5
+@baseUrl = http://localhost:8080
+@baseUrPartner1 = http://host.docker.internal:8000/partner1
+@baseUrPartner2 = http://host.docker.internal:8000/partner2
+@eventID = 10853e59-dc5b-4d7b-a028-01513ef50d76
 
-### Listar todos os eventos 
+### Listar todos os Events 
 GET {{baseUrl}}/events
 
-### Get Event by ID
-GET {{baseUrl}}/events/{{eventId}}
+### Listar Event por ID
+GET {{baseUrl}}/events/{{eventID}}
+
+### Listar Spots por id Event 
+GET {{baseUrl}}/events/{{eventID}}/spots
+
+### Buy Tickets for an Event
+POST {{baseUrl}}/checkout
+Content-Type: application/json
 Accept: application/json
+
+{
+  "event_id": "e0352b32-7698-4805-b029-28302b3a911f",
+  "card_hash": "809kh",
+  "ticket_kind": "half",
+  "spots": [ "B2", "A3", "B5" ],
+  "email": "test@test.com"
+}
+
+### Criar evento
