@@ -1,7 +1,6 @@
 ### Get Event by ID with Variable
 @baseUrl = http://localhost:8080
-@baseUrPartner1 = http://host.docker.internal:8000/partner1
-@baseUrPartner2 = http://host.docker.internal:8000/partner2
+
 @eventID = 10853e59-dc5b-4d7b-a028-01513ef50d76
 
 ### Listar todos os Events 
@@ -27,3 +26,18 @@ Accept: application/json
 }
 
 ### Criar evento
+POST {{baseUrl}}/event
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name":"Event 005 - Partner1",
+  "location": "São Paulo, SP",
+  "organization": "Partner 1",
+  "rating": "L14",
+  "date": "2024-10-10T04:12:05Z",
+  "image_url": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3",
+  "capacity": 10,
+  "price": 100,
+  "partner_id": 1
+}

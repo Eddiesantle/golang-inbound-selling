@@ -8,10 +8,11 @@ import (
 )
 
 type EventsHandler struct {
-	listEventsUseCase *usecase.ListEventsUseCase
-	listSpotsUseCase  *usecase.ListSpotsUseCase
-	getEventUseCase   *usecase.GetEventUseCase
-	buyTicketsUseCase *usecase.BuyTicketsUseCase
+	listEventsUseCase  *usecase.ListEventsUseCase
+	listSpotsUseCase   *usecase.ListSpotsUseCase
+	getEventUseCase    *usecase.GetEventUseCase
+	createEventUseCase *usecase.CreateEventUseCase
+	buyTicketsUseCase  *usecase.BuyTicketsUseCase
 }
 
 func NewEventsHandler(
@@ -19,12 +20,14 @@ func NewEventsHandler(
 	listSpotsUseCase *usecase.ListSpotsUseCase,
 	getEventUseCase *usecase.GetEventUseCase,
 	buyTicketsUseCase *usecase.BuyTicketsUseCase,
+	createEventUseCase *usecase.CreateEventUseCase,
 ) *EventsHandler {
 	return &EventsHandler{
-		listEventsUseCase: listEventsUseCase,
-		listSpotsUseCase:  listSpotsUseCase,
-		getEventUseCase:   getEventUseCase,
-		buyTicketsUseCase: buyTicketsUseCase,
+		listEventsUseCase:  listEventsUseCase,
+		listSpotsUseCase:   listSpotsUseCase,
+		getEventUseCase:    getEventUseCase,
+		buyTicketsUseCase:  buyTicketsUseCase,
+		createEventUseCase: createEventUseCase,
 	}
 }
 
@@ -123,6 +126,39 @@ func (h *EventsHandler) BuyTickets(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(output)
+}
+
+// CreateEvent handles the request create event.
+// @Summary create event
+// @Description create event
+// @Tags Events
+// @Accept json
+// @Produce json
+// @Param input body usecase.CreateEventInputDTO true "Input data"
+// @Success 200 {object} usecase.CreateEventInputDTO
+// @Failure 400 {object} string
+// @Failure 500 {object} string
+// @Router /event [post]
+func (h *EventsHandler) CreateEvent(w http.ResponseWriter, r *http.Request) {
+	var input usecase.CreateEventInputDTO
+
+	// Adicione logs para verificar o método HTTP e o corpo da requisição
+	//fmt.Println("Method:", r.Method)
+
+	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	output, err := h.createEventUseCase.Execute(input)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusCreated)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(output)
 }

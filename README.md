@@ -57,6 +57,7 @@ Este projeto é uma aplicação desenvolvida em **Go** utilizando boas práticas
 - Métodos:
   - `ListEvents()`: Lista todos os eventos disponíveis.
   - `FindEventById(eventId: string)`: Encontra um evento específico pelo seu identificador.
+  - `CreateEvent(event: Event)`: Cria um novo evento.
   - `CreateSpot(eventId: string, spot: Spot)`: Cria e associa um novo lugar a um evento.
   - `CreateTicket(eventId: string, ticket: Ticket)`: Cria um novo ingresso para um evento.
   - `ReserveSpot(eventId: string, spotId: string)`: Reserva um lugar específico para um evento.
@@ -72,6 +73,10 @@ Este projeto é uma aplicação desenvolvida em **Go** utilizando boas práticas
 ### GetEvent
 
 - Descrição: Recupera os detalhes de um evento específico.
+
+### CreateEvent
+
+- Descrição: Criar evento relacionado com o partner
 
 ### ListSpots
 
@@ -152,6 +157,7 @@ ListEvents() ([]Event, error): Lista todos os eventos.
 FindEventByID(eventID string) (*Event, error): Busca um evento pelo ID.
 FindSpotsByEventID(eventID string) ([]*Spot, error): Busca spots por ID do evento.
 FindSpotByName(eventID, spotName string) (*Spot, error): Busca um spot pelo nome e ID do evento.
+CreateEvent(event *Event) error: Cria um novo event.
 CreateSpot(spot *Spot) error: Cria um novo spot.
 CreateTicket(ticket *Ticket) error: Cria um novo ticket.
 ReserveSpot(spotID, ticketID string) error: Reserva um spot associando um ticket.
@@ -162,6 +168,7 @@ O repositório é responsável pelo acesso ao banco de dados MySQL. Ele fornece 
 - **Métodos**
 ListEvents: Retorna uma lista de todos os eventos.
 FindEventByID: Busca um evento pelo ID.
+CreateEvent: Insere um novo evento no banco de dados.
 CreateSpot: Insere um novo spot no banco de dados.
 CreateTicket: Insere um novo ticket no banco de dados.
 ReserveSpot: Atualiza o status de um spot para reservado e associa um ticket a ele.
@@ -176,6 +183,9 @@ Lista todos os eventos cadastrados no sistema.
 
 - **GetEvent**
 Obtém detalhes de um evento específico pelo ID.
+
+- **CreateEvent**
+Cria evento relacionado com id do partner.
 
 - **ListSpots**
 Lista todos os spots disponíveis para um evento específico.

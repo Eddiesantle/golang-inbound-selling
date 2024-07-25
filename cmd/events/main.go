@@ -46,7 +46,7 @@ func main() {
 
 	listEventsUseCase := usecase.NewListEventsUseCase(eventRepo)
 	getEventUseCase := usecase.NewGetEventUseCase(eventRepo)
-	//createEventUseCase := usecase.NewCreateEventUseCase(eventRepo)
+	createEventUseCase := usecase.NewCreateEventUseCase(eventRepo)
 	partnerFactory := service.NewPartnerFactory(partnerBaseURLs)
 	buyTicketsUseCase := usecase.NewBuyTicketsUseCase(eventRepo, partnerFactory)
 	//createSpotsUseCase := usecase.NewCreateSpotsUseCase(eventRepo)
@@ -57,6 +57,7 @@ func main() {
 		listSpotsUseCase,
 		getEventUseCase,
 		buyTicketsUseCase,
+		createEventUseCase,
 	)
 
 	r := http.NewServeMux()
@@ -65,6 +66,7 @@ func main() {
 	r.HandleFunc("/events", eventsHandler.ListEvents)
 	r.HandleFunc("/events/{eventID}", eventsHandler.GetEvent)
 	r.HandleFunc("/events/{eventID}/spots", eventsHandler.ListSpots)
+	r.HandleFunc("POST /event", eventsHandler.CreateEvent)
 	r.HandleFunc("POST /checkout", eventsHandler.BuyTickets)
 
 	server := &http.Server{

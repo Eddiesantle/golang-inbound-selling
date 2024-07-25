@@ -341,3 +341,12 @@ func (r *mysqlEventRepository) ListEvents() ([]domain.Event, error) {
 
 	return events, nil
 }
+
+func (r *mysqlEventRepository) CreateEvent(event *domain.Event) error {
+	query := `
+		INSERT INTO events (id, name, location, organization, rating, date, image_url, capacity, price, partner_id)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+	`
+	_, err := r.db.Exec(query, event.ID, event.Name, event.Location, event.Organization, event.Rating, event.Date.Format("2006-01-02 15:04:05"), event.ImageURL, event.Capacity, event.Price, event.PartnerID)
+	return err
+}
