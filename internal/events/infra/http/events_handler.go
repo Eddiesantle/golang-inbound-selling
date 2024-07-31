@@ -13,6 +13,7 @@ type EventsHandler struct {
 	getEventUseCase    *usecase.GetEventUseCase
 	createEventUseCase *usecase.CreateEventUseCase
 	buyTicketsUseCase  *usecase.BuyTicketsUseCase
+	createSpotsUseCase *usecase.CreateSpotsUseCase
 }
 
 func NewEventsHandler(
@@ -21,6 +22,7 @@ func NewEventsHandler(
 	getEventUseCase *usecase.GetEventUseCase,
 	buyTicketsUseCase *usecase.BuyTicketsUseCase,
 	createEventUseCase *usecase.CreateEventUseCase,
+	createSpotsUseCase *usecase.CreateSpotsUseCase,
 ) *EventsHandler {
 	return &EventsHandler{
 		listEventsUseCase:  listEventsUseCase,
@@ -28,6 +30,7 @@ func NewEventsHandler(
 		getEventUseCase:    getEventUseCase,
 		buyTicketsUseCase:  buyTicketsUseCase,
 		createEventUseCase: createEventUseCase,
+		createSpotsUseCase: createSpotsUseCase,
 	}
 }
 
@@ -153,6 +156,28 @@ func (h *EventsHandler) CreateEvent(w http.ResponseWriter, r *http.Request) {
 	}
 
 	output, err := h.createEventUseCase.Execute(input)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusCreated)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(output)
+}
+
+func (h *EventsHandler) CreateSpots(w http.ResponseWriter, r *http.Request) {
+	eventID := r.PathValue("eventID")
+	var input usecase.CreateSpotsInputDTO
+
+	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	input.EventID = eventID
+
+	output, err := h.createSpotsUseCase.Execute(input)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

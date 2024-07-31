@@ -12,6 +12,15 @@ GET {{baseUrl}}/events/{{eventID}}
 ### Listar Spots por id Event 
 GET {{baseUrl}}/events/{{eventID}}/spots
 
+### Criar Spots por id
+POST {{baseUrl}}/events/{{eventID}}/spots
+Content-Type: application/json
+Accept: application/json
+
+{
+  "number_of_spots": 5
+}
+
 ### Buy Tickets for an Event
 POST {{baseUrl}}/checkout
 Content-Type: application/json
@@ -41,3 +50,4 @@ Accept: application/json
   "price": 100,
   "partner_id": 1
 }
+

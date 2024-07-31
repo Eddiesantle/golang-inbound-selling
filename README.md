@@ -76,7 +76,11 @@ Este projeto é uma aplicação desenvolvida em **Go** utilizando boas práticas
 
 ### CreateEvent
 
-- Descrição: Criar evento relacionado com o partner
+- Descrição: Criar um novo evento relacionado com o partner
+
+### CreateSpots
+
+- Descrição: Cria e associa um novo lugar a um evento.
 
 ### ListSpots
 
@@ -186,6 +190,9 @@ Obtém detalhes de um evento específico pelo ID.
 
 - **CreateEvent**
 Cria evento relacionado com id do partner.
+
+- **CreateSpots**
+Cria e associa spots a um event.
 
 - **ListSpots**
 Lista todos os spots disponíveis para um evento específico.
