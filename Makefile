@@ -1,7 +1,7 @@
 .PHONY: all clean swag init run
 
 # Diretórios
-SWAGGER_DIR = ./docs
+SWAGGER_DIR = ./cmd/events/docs
 CMD_DIR = ./cmd/events
 HANDLER_DIR = ./internal/events/infra/http
 
@@ -24,7 +24,7 @@ clean:
 
 # Gera os arquivos do Swagger
 swag:
-	swag init --output docs --dir ./cmd/events,./internal/events/infra/http,./internal/events/usecase
+	swag init --output $(SWAGGER_DIR) --dir ./cmd/events,./internal/events/infra/http,./internal/events/usecase
 
 # Inicializa o banco de dados (se necessário)
 init:
