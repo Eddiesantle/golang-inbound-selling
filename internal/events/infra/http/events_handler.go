@@ -118,6 +118,7 @@ func (h *EventsHandler) ListSpots(w http.ResponseWriter, r *http.Request) {
 // @Router /checkout [post]
 func (h *EventsHandler) BuyTickets(w http.ResponseWriter, r *http.Request) {
 	var input usecase.BuyTicketsInputDTO
+
 	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

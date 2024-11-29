@@ -46,7 +46,10 @@ func (p *Partner1) MakeReservation(req *ReservationRequest) ([]ReservationRespon
 	}
 
 	// Constrói a URL para a solicitação de reserva, incluindo o ID do evento.
-	url := fmt.Sprintf("%s/event/%s/reserve", p.BaseURL, req.EventID)
+	url := fmt.Sprintf("%s/events/%s/reserve", p.BaseURL, req.EventID)
+
+	//? na requisição eventID: http://host.docker.internal:8000/partner1/event/10853e59-dc5b-4d7b-a028-01513ef50d76/reserve
+	fmt.Println("req -- url:", url)
 
 	// Cria uma nova solicitação HTTP do tipo POST com o corpo da solicitação JSON.
 	httpReq, err := http.NewRequest("POST", url, bytes.NewBuffer(body))

@@ -51,7 +51,7 @@ func (r *mysqlEventRepository) ReserveSpot(spotID, ticketID string) error {
 // Recebe um ponteiro para um objeto Ticket do domínio.
 func (r *mysqlEventRepository) CreateTicket(ticket *domain.Ticket) error {
 	query := `
-		INSERT INTO tickets (id, event_id, spot_id, ticket_type, price)
+		INSERT INTO tickets (id, event_id, spot_id, ticket_kind, price)
 		VALUES(?, ?, ?, ?, ?)
 	`
 	_, err := r.db.Exec(query, ticket.ID, ticket.EventID, ticket.Spot.ID, ticket.TicketKind, ticket.Price)
