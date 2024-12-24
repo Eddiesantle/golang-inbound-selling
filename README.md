@@ -220,7 +220,7 @@ Crie um banco de dados MySQL e configure as credenciais no arquivo de configura√
 
 4. Execute docker compose 
 ```
-docker compose up 
+docker compose up -d
 ```
 
 4. Acessar conteiner golang 
